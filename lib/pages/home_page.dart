@@ -1,3 +1,4 @@
+import 'package:anki_like_app/components/home_page/topic_tile.dart';
 import 'package:anki_like_app/data/words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                     childCount: _topics.length,
-                    (context, index) => TopicTile(topics: _topics)),
+                    (context, index) => TopicTile(topic: _topics[index])),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 16,
@@ -69,5 +70,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
