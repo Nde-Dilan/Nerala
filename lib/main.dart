@@ -1,3 +1,4 @@
+import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flashcards App',
+      title: 'Flashcards',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 84, 0, 230)),
-        useMaterial3: true,
-      ),
+      theme: appTheme,
       home: const HomePage(),
     );
   }

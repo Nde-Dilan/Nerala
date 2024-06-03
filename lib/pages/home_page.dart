@@ -1,7 +1,7 @@
 import 'package:anki_like_app/components/home_page/topic_tile.dart';
 import 'package:anki_like_app/data/words.dart';
+import 'package:anki_like_app/configs/styles/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,27 +16,31 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     for (var word in words) {
-      if (_topics.contains(word.topic)) {
-        // _topics.add(word.topic);
+      if (!_topics.contains(word.topic)) {
+        _topics.add(word.topic);
       }
-      _topics.add(word.topic);
       _topics.sort();
     }
-    print(_topics);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Palette palette = Palette();
+
     final size = MediaQuery.of(context).size;
     final widthPadding = size.width * 0.04;
     const borderRadius = 30.0;
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: palette.green,
           toolbarHeight: size.height * .15,
-          title: const Text("Flascards App"),
+          title: const Text(
+            "Flascards App",
+            style:
+                TextStyle(fontWeight: FontWeight.bold, fontFamily: "Ink Free"),
+          ),
           centerTitle: true,
           elevation: 0,
           shape: const RoundedRectangleBorder(
@@ -59,7 +63,9 @@ class _HomePageState extends State<HomePage> {
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                     childCount: _topics.length,
-                    (context, index) => TopicTile(topic: _topics[index])),
+                    (context, index) => TopicTile(
+                        topic: _topics[index],
+                        image: "assets/images/${_topics[index]}.png")),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 16,
