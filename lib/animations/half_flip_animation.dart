@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// This class is responsible for turning the card with an angle of 90
+
 class HalfFlipAnimation extends StatefulWidget {
   final Widget child;
   final int duration;

@@ -16,6 +16,16 @@ class FlashCardsPage extends StatefulWidget {
 
 class _FlashCardsPageState extends State<FlashCardsPage> {
   @override
+  void initState() {
+    //Since we need to access the buildcontext we need to wrap our provider call inside this [addPostFrameCallback]
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<FlashCardsNotifier>(context, listen: false).runSlideCard1();
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Consumer<FlashCardsNotifier>(
@@ -24,16 +34,18 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
               Scaffold(
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56), child: CustomAppBar()),
-        body: const Stack(
-          children: [
-            CardTwo(),
-            CardOne(),
-          ],
+        body: IgnorePointer(
+          //Use to help its children ignore all touch events
+          ignoring: notifier.shouldIIgnoreTouch,
+          child: const Stack(
+            children: [
+              CardTwo(),
+              CardOne(),
+            ],
+          ),
         ),
         backgroundColor: palette.trueWhite,
       ),
     );
   }
 }
-
-
