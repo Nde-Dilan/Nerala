@@ -4,7 +4,6 @@ import 'package:anki_like_app/components/flashcards_page/card_two.dart';
 import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class FlashCardsPage extends StatefulWidget {
@@ -19,7 +18,11 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
   void initState() {
     //Since we need to access the buildcontext we need to wrap our provider call inside this [addPostFrameCallback]
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<FlashCardsNotifier>(context, listen: false).runSlideCard1();
+      final flascardsNotifier =
+          Provider.of<FlashCardsNotifier>(context, listen: false);
+      flascardsNotifier.runSlideCard1();
+      flascardsNotifier.generateAllSelectedWords();
+      flascardsNotifier.generateCurrentWord();
     });
 
     super.initState();
@@ -27,7 +30,6 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Consumer<FlashCardsNotifier>(
       builder:
           (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>

@@ -20,6 +20,7 @@ class CardOne extends StatelessWidget {
           (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>
               GestureDetector(
         onDoubleTap: () {
+          print("object");
           notifier.runFlipCard1();
           notifier.setIgnoreTouch(ignore: true);
         },
@@ -46,11 +47,11 @@ class CardOne extends StatelessWidget {
               duration: 1500,
               child: Center(
                 child: Container(
-                  child: Text("Card1"),
                   width: size.width * .5,
                   height: size.height * 0.5,
                   decoration:
                       BoxDecoration(color: Theme.of(context).primaryColor),
+                  child: Text(notifier.word.english),
                 ),
               ),
             ),

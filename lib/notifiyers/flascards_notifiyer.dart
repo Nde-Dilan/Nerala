@@ -1,22 +1,51 @@
+import 'dart:math';
+
+import 'package:anki_like_app/data/words.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
+import 'package:anki_like_app/models/word.dart';
 import 'package:flutter/material.dart';
 
 class FlashCardsNotifier extends ChangeNotifier {
   String topic = "";
+
+  ///Word you will find on the card at any given moment
+  Word word = Word(
+      topic: "",
+      english: "",
+      character: "",
+      pinyin: "");
+
+  /// All the words for a selected topic
+  List<Word> selectedWords = [];
 
   setTopic({required String topic}) {
     this.topic = topic;
     notifyListeners();
   }
 
+  generateAllSelectedWords() {
+    ///Make sure it's empty before trying to populate it
+    selectedWords.clear();
+    selectedWords = words.where((element) => element.topic == topic).toList();
+  }
+
+  generateCurrentWord() {
+    final r = Random().nextInt(selectedWords.length);
+    word = selectedWords[r];
+  }
+
+  /// Animation code
+
   bool shouldIIgnoreTouch = true;
 
   setIgnoreTouch({required bool ignore}) {
     shouldIIgnoreTouch = ignore;
+    notifyListeners();
   }
 
   SlideDirection swipeDirection = SlideDirection.none;
 
+  ///Slide and Flip effects
   bool slideCard1 = false,
       flipCard1 = false,
       flipCard2 = false,

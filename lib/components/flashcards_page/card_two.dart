@@ -23,14 +23,12 @@ class CardTwo extends StatelessWidget {
           if (details.primaryVelocity! > 100) {
             notifier.runSwipeCard2(direction: SlideDirection.leftAway);
             notifier.runSlideCard1();
-                          notifier.setIgnoreTouch(ignore: true);
-
+            notifier.setIgnoreTouch(ignore: true);
           }
           if (details.primaryVelocity! < 100) {
             notifier.runSwipeCard2(direction: SlideDirection.rightAway);
             notifier.runSlideCard1();
-                          notifier.setIgnoreTouch(ignore: true);
-
+            notifier.setIgnoreTouch(ignore: true);
           }
         },
         child: HalfFlipAnimation(
@@ -53,11 +51,11 @@ class CardTwo extends StatelessWidget {
               duration: 1500,
               child: Center(
                 child: Container(
-                  child: Text("Card2"),
                   width: size.width * .5,
                   height: size.height * 0.5,
                   decoration:
                       BoxDecoration(color: Theme.of(context).primaryColor),
+                  child: Text(notifier.word.pinyin),
                 ),
               ),
             ),
