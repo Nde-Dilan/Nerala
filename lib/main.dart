@@ -1,5 +1,6 @@
 import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/pages/home_page.dart';
+import 'package:anki_like_app/pages/test_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,16 @@ class MyApp extends StatelessWidget {
       title: 'Flashcards',
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      home: const HomePage(),
+      home: PageView(
+        children: const [
+          HomePage(),
+          MyWidget(color: Colors.red),
+          MyWidget(color: Colors.green),
+          MyWidget(color: Colors.black),
+          MyWidget(color: Colors.orange),
+          MyWidget(color: Colors.yellow),
+        ],
+      ),
     );
   }
 }
