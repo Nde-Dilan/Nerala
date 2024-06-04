@@ -11,11 +11,14 @@ final appTheme = ThemeData(
     fontSize: 18,
   )),
   appBarTheme: AppBarTheme(
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: palette.green,
     titleTextStyle: TextStyle(
-    color: palette.trueWhite,
-    fontWeight: FontWeight.bold,
-    fontSize: 20,
-  ),
+      color: palette.trueWhite,
+      fontWeight: FontWeight.bold,
+      fontSize: 20,
+    ),
   ),
   scaffoldBackgroundColor: palette.trueWhite,
   useMaterial3: true,

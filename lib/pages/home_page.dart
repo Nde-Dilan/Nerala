@@ -59,8 +59,6 @@ class _HomePageState extends State<HomePage> {
                   child: Image.asset("assets/buttons/Review.png")),
             ],
           ),
-          centerTitle: true,
-          elevation: 0,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(borderRadius),

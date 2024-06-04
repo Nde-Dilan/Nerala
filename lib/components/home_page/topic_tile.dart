@@ -1,5 +1,6 @@
 import 'package:anki_like_app/animations/fade_in_animation.dart';
 import 'package:anki_like_app/configs/styles/palette.dart';
+import 'package:anki_like_app/utils/methods.dart';
 import 'package:flutter/material.dart';
 
 class TopicTile extends StatelessWidget {
@@ -19,7 +20,7 @@ class TopicTile extends StatelessWidget {
       duration: 1000,
       child: InkWell(
         onTap: () {
-          //TODO: Use GoRouter for navigation here
+          loadSession(context: context, topic: topic);
         },
         child: Container(
             decoration: BoxDecoration(
@@ -33,7 +34,8 @@ class TopicTile extends StatelessWidget {
                     flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image(image: AssetImage(image)),
+                      child: Hero(tag: topic,
+                      child: Image(image: AssetImage(image))),
                     )),
                 Expanded(child: Text(topic)),
               ],

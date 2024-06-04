@@ -1,10 +1,14 @@
 import 'package:anki_like_app/configs/themes.dart';
+import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:anki_like_app/pages/home_page.dart';
-import 'package:anki_like_app/pages/test_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => FlashCardsNotifier())
+  ],
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,11 +23,7 @@ class MyApp extends StatelessWidget {
       home: PageView(
         children: const [
           HomePage(),
-          MyWidget(color: Colors.red),
-          MyWidget(color: Colors.green),
-          MyWidget(color: Colors.black),
-          MyWidget(color: Colors.orange),
-          MyWidget(color: Colors.yellow),
+          
         ],
       ),
     );
