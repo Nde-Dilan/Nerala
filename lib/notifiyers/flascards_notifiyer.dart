@@ -7,4 +7,22 @@ class FlashCardsNotifier extends ChangeNotifier {
     this.topic = topic;
     notifyListeners();
   }
+
+  bool flipCard1 = false;
+
+  runFlipCard1() {
+    flipCard1 = true;
+    notifyListeners();
+  }
+
+  bool flipCard2 = false;
+
+  runFlipCard2() {
+    flipCard2 = true;
+    notifyListeners();
+  }
+  unRunFlipCard2() {
+    flipCard2 = false;
+    notifyListeners();
+  }
 }

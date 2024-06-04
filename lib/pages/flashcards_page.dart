@@ -1,7 +1,7 @@
-import 'package:anki_like_app/animations/fade_in_animation.dart';
-import 'package:anki_like_app/animations/slide_animation.dart';
 import 'package:anki_like_app/app/custom_appbar.dart';
-import 'package:anki_like_app/enums/slide_directions.dart';
+import 'package:anki_like_app/components/flashcards_page/card_one.dart';
+import 'package:anki_like_app/components/flashcards_page/card_two.dart';
+import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -24,23 +24,16 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
               Scaffold(
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56), child: CustomAppBar()),
-        body: SlideAnimation(
-          duration: 1000,
-          slideDirection: SlideDirection.upIn,
-          child: FadeInAnimation(
-            duration: 1500,
-            child: Center(
-              child: Container(
-                width: size.width * .9,
-                height: size.height * 0.7,
-                decoration:
-                    BoxDecoration(color: Theme.of(context).primaryColor),
-              ),
-            ),
-          ),
+        body: const Stack(
+          children: [
+            CardTwo(),
+            CardOne(),
+          ],
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: palette.trueWhite,
       ),
     );
   }
 }
+
+
