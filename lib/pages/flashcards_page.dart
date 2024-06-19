@@ -24,7 +24,7 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
           Provider.of<FlashCardsNotifier>(context, listen: false);
       flascardsNotifier.runSlideCard1();
       flascardsNotifier.generateAllSelectedWords();
-      flascardsNotifier.generateCurrentWord();
+      flascardsNotifier.generateCurrentWord(context:context);
     });
 
     super.initState();

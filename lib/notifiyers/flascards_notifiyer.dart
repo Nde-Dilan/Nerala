@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:anki_like_app/components/flashcards_page/result_box.dart';
 import 'package:anki_like_app/configs/constants.dart';
 import 'package:anki_like_app/data/words.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
@@ -7,6 +8,28 @@ import 'package:anki_like_app/models/word.dart';
 import 'package:flutter/material.dart';
 
 class FlashCardsNotifier extends ChangeNotifier {
+  /// List of all the incorrect cards
+  List<Word> incorrectCards = [];
+
+  ///Tracking of the rounds
+  bool isFirstRound = true, isRoundCompleted = false, isSessionCompleted = false;
+
+  resetBool(){
+    isFirstRound = true;
+    isRoundCompleted = false;
+    isSessionCompleted = false;
+  }
+  updateCardOutcome({required Word word, required bool isCorrect}) {
+    if (!isCorrect) {
+      incorrectCards.add(word);
+    }
+    notifyListeners();
+
+    incorrectCards.forEach((element) {
+      print(element.english);
+    });
+  }
+
   String topic = "";
 
   ///Word you will find on the card at any given moment
@@ -17,6 +40,7 @@ class FlashCardsNotifier extends ChangeNotifier {
   /// All the words for a selected topic
   List<Word> selectedWords = [];
 
+  ///Set the topic of the words when the user changes topic
   setTopic({required String topic}) {
     this.topic = topic;
     notifyListeners();
@@ -25,17 +49,30 @@ class FlashCardsNotifier extends ChangeNotifier {
   generateAllSelectedWords() {
     ///Make sure it's empty before trying to populate it
     selectedWords.clear();
-    selectedWords = words.where((element) => element.topic == topic).toList();
+    isRoundCompleted = false;
+    if (isFirstRound) {
+      selectedWords = words.where((element) => element.topic == topic).toList();
+    } else {
+      if (incorrectCards.isEmpty) {
+        isSessionCompleted = true;
+      }
+      selectedWords = incorrectCards.toList();
+      incorrectCards.clear();
+    }
   }
 
   ///Generate a random word from the selected words
-  generateCurrentWord() {
+  generateCurrentWord({required BuildContext context}) {
     if (selectedWords.isNotEmpty) {
       final r = Random().nextInt(selectedWords.length);
       word1 = selectedWords[r];
       selectedWords.removeAt(r);
     } else {
-      print("All words revised");
+      isRoundCompleted = true;
+      isFirstRound = false;
+      Future.delayed(const Duration(milliseconds: 500), () {
+        showDialog(context: context, builder: (context) => const ResultBox());
+      });
     }
 
     Future.delayed(const Duration(milliseconds: slideAnimDuration), () {
@@ -83,6 +120,8 @@ class FlashCardsNotifier extends ChangeNotifier {
   }
 
   runSwipeCard2({required SlideDirection direction}) {
+    updateCardOutcome(
+        word: word1, isCorrect: direction == SlideDirection.leftAway);
     resetSwipeCard2 = false;
     swipeDirection = direction;
     swipeCard2 = true;

@@ -1,9 +1,7 @@
 import 'package:anki_like_app/animations/fade_in_animation.dart';
 import 'package:anki_like_app/animations/half_flip_animation.dart';
 import 'package:anki_like_app/animations/slide_animation.dart';
-import 'package:anki_like_app/components/card_display.dart';
-import 'package:anki_like_app/configs/constants.dart';
-import 'package:anki_like_app/configs/themes.dart';
+import 'package:anki_like_app/components/flashcards_page/card_display.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +43,8 @@ class CardOne extends StatelessWidget {
               notifier.setIgnoreTouch(ignore: false);
             },
             reset: notifier.resetSlideCard1,
-            animate: notifier.slideCard1,
+            //Run it if the notifier.slideCard1 is true and the round is not completed
+            animate: notifier.slideCard1 && !notifier.isRoundCompleted,
             duration: 1000,
             // delay: 200,
             slideDirection: SlideDirection.upIn,

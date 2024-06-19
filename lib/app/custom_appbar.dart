@@ -12,6 +12,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Palette palette = Palette();
+
     return Consumer<FlashCardsNotifier>(
       builder:
           (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>
@@ -26,6 +27,7 @@ class CustomAppBar extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                notifier.resetBool();
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => const HomePage()),
