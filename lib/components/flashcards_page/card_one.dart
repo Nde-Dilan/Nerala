@@ -47,10 +47,14 @@ class CardOne extends StatelessWidget {
             reset: notifier.resetSlideCard1,
             animate: notifier.slideCard1,
             duration: 1000,
+            // delay: 200,
             slideDirection: SlideDirection.upIn,
             child: FadeInAnimation(
               duration: 1500,
-              child: CardDisplay(size: size, isCardOne: true,),
+              child: CardDisplay(
+                size: size,
+                isCardOne: true,
+              ),
             ),
           ),
         ),
@@ -58,4 +62,3 @@ class CardOne extends StatelessWidget {
     );
   }
 }
-

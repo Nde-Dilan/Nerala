@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class SlideAnimation extends StatefulWidget {
   final Widget child;
   final int duration;
+  final int delay;
   final bool animate;
   final bool? reset;
   final VoidCallback? animationCompleted;
@@ -15,7 +16,8 @@ class SlideAnimation extends StatefulWidget {
       required this.slideDirection,
       this.animate = true,
       this.reset,
-       this.animationCompleted});
+      this.animationCompleted,
+      this.delay = 0});
 
   @override
   State<SlideAnimation> createState() => _SlideAnimationState();
@@ -29,17 +31,13 @@ class _SlideAnimationState extends State<SlideAnimation>
   void initState() {
     _animationController = AnimationController(
         duration: Duration(milliseconds: widget.duration), vsync: this)
-        //Listen for the completion of the animation and notify us
+      //Listen for the completion of the animation and notify us
       ..addListener(() {
         if (_animationController.isCompleted) {
           widget.animationCompleted?.call();
         }
       });
-      //If it's time launch the animation
-
-    if (widget.animate) {
-      _animationController.forward();
-    }
+    //If it's time launch the animation
 
     super.initState();
   }
@@ -49,7 +47,16 @@ class _SlideAnimationState extends State<SlideAnimation>
   void didUpdateWidget(covariant SlideAnimation oldWidget) {
     //If it's time launch the animation
     if (widget.animate) {
-      _animationController.forward();
+      if (widget.delay > 0) {
+        Future.delayed(Duration(milliseconds: widget.delay), () {
+          //let's check if the state obj is mounted on the tree
+          if (mounted) {
+            _animationController.forward();
+          }
+        });
+      } else {
+        _animationController.forward();
+      }
     }
     if (widget.reset == true) {
       _animationController.reset();
