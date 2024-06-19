@@ -1,7 +1,11 @@
+import 'dart:math';
+
+import 'package:anki_like_app/components/buttons/tts_button.dart';
 import 'package:anki_like_app/configs/constants.dart';
 import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class CardDisplay extends StatelessWidget {
@@ -22,7 +26,7 @@ class CardDisplay extends StatelessWidget {
             Center(
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    vertical: size.height * 0.05, horizontal: 18),
+                    vertical: size.height * 0.02, horizontal: 18),
                 width: size.width * .75,
                 height: size.height * 0.5,
                 decoration: BoxDecoration(
@@ -37,7 +41,8 @@ class CardDisplay extends StatelessWidget {
                           SizedBox(
                             height: size.height * 0.040,
                           ),
-                          buildTextBox(notifier.word1.english, context, 1),
+                          buildTextBox(
+                              notifier.word1.english, context, 1, isCardOne),
                         ],
                       )
                     : Column(
@@ -46,16 +51,18 @@ class CardDisplay extends StatelessWidget {
                           SizedBox(
                             height: size.height * 0.040,
                           ),
-                          buildTextBox(notifier.word2.character, context, 1),
+                          buildTextBox(
+                              notifier.word2.character, context, 1, isCardOne),
+                          const TextToSpeechButton()
                         ],
                       ),
               ),
             ));
   }
 
-/// If we want to include hand writting characters and the french ones, just modify this method
+  /// If we want to include hand writting characters and the french ones, just modify this method
   Expanded buildTextBox(
-      String word, BuildContext context, int flex) {
+      String word, BuildContext context, int flex, bool isCardOne) {
     return Expanded(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -63,8 +70,13 @@ class CardDisplay extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         child: FittedBox(
-          child: Text(word,
-              style: Theme.of(context).textTheme.displayLarge),
+          child: isCardOne
+              ? Text(word, style: Theme.of(context).textTheme.displayLarge)
+              : Transform(
+                  transform: Matrix4.rotationY(pi),
+                  alignment: Alignment.center,
+                  child: Text(word,
+                      style: Theme.of(context).textTheme.displayLarge)),
         ),
       ),
     ));
