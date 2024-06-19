@@ -4,6 +4,7 @@ import 'package:anki_like_app/models/word.dart';
 
 final List<Word> words = [
 
+  // Word(topic: "Beach", english: "Swimsuit",french: "Swimsuit", ghomala: "Yóu Yǒng Yī", character: "游泳衣"),
   Word(topic: "Beach", english: "Swimsuit", pinyin: "Yóu Yǒng Yī", character: "游泳衣"),
   Word(topic: "Beach", english: "Seashell", pinyin: "Bèi Ké", character: "贝壳"),
   Word(topic: "Beach", english: "Sunscreen", pinyin: "Fáng Shài Shuāng", character: "防晒霜"),

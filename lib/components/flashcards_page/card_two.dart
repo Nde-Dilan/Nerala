@@ -1,6 +1,7 @@
 import 'package:anki_like_app/animations/fade_in_animation.dart';
 import 'package:anki_like_app/animations/half_flip_animation.dart';
 import 'package:anki_like_app/animations/slide_animation.dart';
+import 'package:anki_like_app/configs/constants.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
@@ -15,20 +16,25 @@ class CardTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
+    /// The Consumer widget is used to listen to the changes in the FlashCardsNotifier
     return Consumer<FlashCardsNotifier>(
       builder:
           (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>
               GestureDetector(
+        /// The onHorizontalDragEnd is used to detect the direction of the swipe
         onHorizontalDragEnd: (details) {
           if (details.primaryVelocity! > 100) {
             notifier.runSwipeCard2(direction: SlideDirection.leftAway);
             notifier.runSlideCard1();
             notifier.setIgnoreTouch(ignore: true);
+            notifier.generateCurrentWord();
           }
           if (details.primaryVelocity! < 100) {
             notifier.runSwipeCard2(direction: SlideDirection.rightAway);
             notifier.runSlideCard1();
             notifier.setIgnoreTouch(ignore: true);
+            notifier.generateCurrentWord();
           }
         },
         child: HalfFlipAnimation(
@@ -37,7 +43,9 @@ class CardTwo extends StatelessWidget {
           reset: notifier.resetFlipCard2,
           flipFromHalfWay: true,
           animationCompleted: () {
+            /// The resetCardTwo is called to reset the card to its original position and when the animation is completed, the ignoreTouch is set to false like that we can interact with the card again
             notifier.setIgnoreTouch(ignore: false);
+            // notifier.resetCardTwo();
           },
           child: SlideAnimation(
             animationCompleted: () {
@@ -45,7 +53,7 @@ class CardTwo extends StatelessWidget {
             },
             reset: notifier.resetSwipeCard2,
             animate: notifier.swipeCard2,
-            duration: 1000,
+            duration: slideAnimDuration,
             slideDirection: notifier.swipeDirection,
             child: FadeInAnimation(
               duration: 1500,
@@ -55,7 +63,7 @@ class CardTwo extends StatelessWidget {
                   height: size.height * 0.5,
                   decoration:
                       BoxDecoration(color: Theme.of(context).primaryColor),
-                  child: Text(notifier.word.pinyin),
+                  child: Text(notifier.word2.character),
                 ),
               ),
             ),

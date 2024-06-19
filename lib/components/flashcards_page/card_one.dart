@@ -20,8 +20,8 @@ class CardOne extends StatelessWidget {
           (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>
               GestureDetector(
         onDoubleTap: () {
-          print("object");
           notifier.runFlipCard1();
+          /// The ignoreTouch is set to true to prevent the user from interacting with the card while it is flipping
           notifier.setIgnoreTouch(ignore: true);
         },
         child: HalfFlipAnimation(
@@ -37,6 +37,7 @@ class CardOne extends StatelessWidget {
           },
           child: SlideAnimation(
             animationCompleted: () {
+              /// The resetSlideCard1 is called to reset the card to its original position and when the animation is completed, the ignoreTouch is set to false like that we can interact with the card again
               notifier.setIgnoreTouch(ignore: false);
             },
             reset: notifier.resetSlideCard1,
@@ -51,7 +52,7 @@ class CardOne extends StatelessWidget {
                   height: size.height * 0.5,
                   decoration:
                       BoxDecoration(color: Theme.of(context).primaryColor),
-                  child: Text(notifier.word.english),
+                  child: Text(notifier.word1.english),
                 ),
               ),
             ),

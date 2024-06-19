@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:anki_like_app/configs/constants.dart';
 import 'package:anki_like_app/data/words.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
 import 'package:anki_like_app/models/word.dart';
@@ -9,11 +10,8 @@ class FlashCardsNotifier extends ChangeNotifier {
   String topic = "";
 
   ///Word you will find on the card at any given moment
-  Word word = Word(
-      topic: "",
-      english: "",
-      character: "",
-      pinyin: "");
+  Word word1 = Word(topic: "", english: "", character: "", pinyin: "");
+  Word word2 = Word(topic: "", english: "", character: "", pinyin: "");
 
   /// All the words for a selected topic
   List<Word> selectedWords = [];
@@ -29,9 +27,19 @@ class FlashCardsNotifier extends ChangeNotifier {
     selectedWords = words.where((element) => element.topic == topic).toList();
   }
 
+  ///Generate a random word from the selected words
   generateCurrentWord() {
-    final r = Random().nextInt(selectedWords.length);
-    word = selectedWords[r];
+    if (selectedWords.isNotEmpty) {
+      final r = Random().nextInt(selectedWords.length);
+      word1 = selectedWords[r];
+      selectedWords.removeAt(r);
+    } else {
+      print("All words revised");
+    }
+
+    Future.delayed(const Duration(milliseconds: slideAnimDuration), () {
+      word2 = word1;
+    });
   }
 
   /// Animation code

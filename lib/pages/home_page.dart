@@ -4,7 +4,6 @@ import 'package:anki_like_app/configs/constants.dart';
 import 'package:anki_like_app/data/words.dart';
 import 'package:anki_like_app/configs/styles/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

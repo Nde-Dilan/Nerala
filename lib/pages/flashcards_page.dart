@@ -18,6 +18,8 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
   void initState() {
     //Since we need to access the buildcontext we need to wrap our provider call inside this [addPostFrameCallback]
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ///Calling provide inside initState normally isn't accepted, but you can use the addPostFrameCallback to get the context and do it.
+
       final flascardsNotifier =
           Provider.of<FlashCardsNotifier>(context, listen: false);
       flascardsNotifier.runSlideCard1();
