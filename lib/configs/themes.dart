@@ -5,11 +5,14 @@ Palette palette = Palette();
 final appTheme = ThemeData(
   primaryColor: palette.green,
   textTheme: TextTheme(
-      bodyMedium: TextStyle(
-    color: palette.trueWhite,
-    fontWeight: FontWeight.w400,
-    fontSize: 18,
-  )),
+    bodyMedium: TextStyle(
+      color: palette.trueWhite,
+      fontWeight: FontWeight.w400,
+      fontSize: 18,
+    ),
+    displayLarge: TextStyle(
+        color: palette.trueWhite, fontWeight: FontWeight.bold, fontSize: 58),
+  ),
   appBarTheme: AppBarTheme(
     elevation: 0,
     centerTitle: true,

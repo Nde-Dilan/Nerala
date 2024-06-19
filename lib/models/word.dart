@@ -4,6 +4,9 @@ class Word {
   final String character;
   final String pinyin;
 
-  Word({required this.topic, required this.english, required this.character, required this.pinyin});
-  
+  Word(
+      {required this.topic,
+      required this.english,
+      required this.character,
+      required this.pinyin});
 }

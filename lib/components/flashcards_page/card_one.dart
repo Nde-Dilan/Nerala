@@ -1,6 +1,9 @@
 import 'package:anki_like_app/animations/fade_in_animation.dart';
 import 'package:anki_like_app/animations/half_flip_animation.dart';
 import 'package:anki_like_app/animations/slide_animation.dart';
+import 'package:anki_like_app/components/card_display.dart';
+import 'package:anki_like_app/configs/constants.dart';
+import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +24,7 @@ class CardOne extends StatelessWidget {
               GestureDetector(
         onDoubleTap: () {
           notifier.runFlipCard1();
+
           /// The ignoreTouch is set to true to prevent the user from interacting with the card while it is flipping
           notifier.setIgnoreTouch(ignore: true);
         },
@@ -46,15 +50,7 @@ class CardOne extends StatelessWidget {
             slideDirection: SlideDirection.upIn,
             child: FadeInAnimation(
               duration: 1500,
-              child: Center(
-                child: Container(
-                  width: size.width * .5,
-                  height: size.height * 0.5,
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).primaryColor),
-                  child: Text(notifier.word1.english),
-                ),
-              ),
+              child: CardDisplay(size: size, isCardOne: true,),
             ),
           ),
         ),
@@ -62,3 +58,4 @@ class CardOne extends StatelessWidget {
     );
   }
 }
+

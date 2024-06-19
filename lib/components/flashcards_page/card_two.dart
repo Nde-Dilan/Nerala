@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:anki_like_app/animations/fade_in_animation.dart';
 import 'package:anki_like_app/animations/half_flip_animation.dart';
 import 'package:anki_like_app/animations/slide_animation.dart';
+import 'package:anki_like_app/components/card_display.dart';
 import 'package:anki_like_app/configs/constants.dart';
+import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/enums/slide_directions.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
 import 'package:flutter/material.dart';
@@ -57,14 +61,9 @@ class CardTwo extends StatelessWidget {
             slideDirection: notifier.swipeDirection,
             child: FadeInAnimation(
               duration: 1500,
-              child: Center(
-                child: Container(
-                  width: size.width * .5,
-                  height: size.height * 0.5,
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).primaryColor),
-                  child: Text(notifier.word2.character),
-                ),
+              child: CardDisplay(
+                isCardOne: false,
+                size: size,
               ),
             ),
           ),

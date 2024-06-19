@@ -10,7 +10,8 @@ class FlashCardsNotifier extends ChangeNotifier {
   String topic = "";
 
   ///Word you will find on the card at any given moment
-  Word word1 = Word(topic: "", english: "", character: "", pinyin: "");
+  Word word1 =
+      Word(topic: "", english: "Loading Arrow", character: "", pinyin: "");
   Word word2 = Word(topic: "", english: "", character: "", pinyin: "");
 
   /// All the words for a selected topic
