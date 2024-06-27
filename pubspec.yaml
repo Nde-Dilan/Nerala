@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   provider: ^6.1.2
   flutter_tts: ^4.0.2
+  flutter_native_splash: ^2.4.0
+  icons_launcher: ^2.1.7
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,13 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+icons_launcher:
+  image_path: "assets/Nerala.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -64,6 +73,7 @@ flutter:
   assets:
     - assets/topics/
     - assets/buttons/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

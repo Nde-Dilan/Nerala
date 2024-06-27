@@ -29,17 +29,17 @@ class CardTwo extends StatelessWidget {
             notifier.runSwipeCard2(direction: SlideDirection.leftAway);
             notifier.runSlideCard1();
             notifier.setIgnoreTouch(ignore: true);
-            notifier.generateCurrentWord(context:context);
+            notifier.generateCurrentWord(context: context);
           }
           if (details.primaryVelocity! < 100) {
             notifier.runSwipeCard2(direction: SlideDirection.rightAway);
             notifier.runSlideCard1();
             notifier.setIgnoreTouch(ignore: true);
-            notifier.generateCurrentWord(context:context);
+            notifier.generateCurrentWord(context: context);
           }
         },
         child: HalfFlipAnimation(
-          duration: 400,
+          duration: 300,
           animate: notifier.flipCard2,
           reset: notifier.resetFlipCard2,
           flipFromHalfWay: true,
@@ -57,7 +57,7 @@ class CardTwo extends StatelessWidget {
             duration: slideAnimDuration,
             slideDirection: notifier.swipeDirection,
             child: FadeInAnimation(
-              duration: 1500,
+              duration: 800,
               child: CardDisplay(
                 isCardOne: false,
                 size: size,

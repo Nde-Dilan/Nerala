@@ -45,11 +45,11 @@ class CardOne extends StatelessWidget {
             reset: notifier.resetSlideCard1,
             //Run it if the notifier.slideCard1 is true and the round is not completed
             animate: notifier.slideCard1 && !notifier.isRoundCompleted,
-            duration: 1000,
+            duration: 500,
             // delay: 200,
             slideDirection: SlideDirection.upIn,
             child: FadeInAnimation(
-              duration: 1500,
+              duration: 500,
               child: CardDisplay(
                 size: size,
                 isCardOne: true,

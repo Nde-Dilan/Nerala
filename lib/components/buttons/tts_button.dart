@@ -27,6 +27,7 @@ class _TextToSpeechButtonState extends State<TextToSpeechButton> {
     });
     super.initState();
   }
+
   @override
   void dispose() {
     _flutterTts.stop();
@@ -35,31 +36,31 @@ class _TextToSpeechButtonState extends State<TextToSpeechButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Consumer<FlashCardsNotifier>(
-        builder:
-            (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>
-                IconButton(
-                    onPressed: () {
-                      _runTts(text: notifier.word1.character);
-                      setState(() {
-                        _isTapped = !_isTapped;
-                      });
-                      Future.delayed(const Duration(milliseconds: 500), () {
-                        setState(() {
-                          _isTapped = !_isTapped;
-                        });
-                      });
-                    },
-                    icon: Transform(
-                      transform: Matrix4.rotationY(pi),
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.volume_up,
-                        size: 50,
-                        color: _isTapped ? palette.gray : palette.trueWhite,
-                      ),
-                    )),
+    return Consumer<FlashCardsNotifier>(
+      builder:
+          (BuildContext context, FlashCardsNotifier notifier, Widget? child) =>
+              Expanded(
+        child: IconButton(
+            onPressed: () {
+              _runTts(text: notifier.word1.character);
+              setState(() {
+                _isTapped = !_isTapped;
+              });
+              Future.delayed(const Duration(milliseconds: 500), () {
+                setState(() {
+                  _isTapped = !_isTapped;
+                });
+              });
+            },
+            icon: Transform(
+              transform: Matrix4.rotationY(pi),
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.volume_up,
+                size: 50,
+                color: _isTapped ? palette.gray : palette.trueWhite,
+              ),
+            )),
       ),
     );
   }
@@ -67,9 +68,9 @@ class _TextToSpeechButtonState extends State<TextToSpeechButton> {
   void _setUpTTS() async {
     await _flutterTts.setLanguage(languageCode);
 
-    _flutterTts.getLanguages.then((languages) {
-      print("languages: $languages");
-    });
+    // _flutterTts.getLanguages.then((languages) {
+    //   print("languages: $languages");
+    // });
 
     await _flutterTts.setSpeechRate(0.4);
   }

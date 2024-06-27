@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               const FadeInAnimation(
                 duration: 800,
                 child: Text(
-                  "Chinesse Flascards \n中文学习卡",
+                  "Nerala Flascards \n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, fontFamily: "Ink Free"),
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                   child: const FadeInAnimation(
                     duration: 1500,
                     child: Image(
-                      image: AssetImage("assets/topics/Dragon.png"),
+                      image: AssetImage("assets/images/Nerala.png"),
                     ),
                   ),
                 ),
