@@ -27,7 +27,11 @@ class CustomAppBar extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                //Reset everything when we changed the current topic
                 notifier.resetBool();
+                
+                notifier.resetCardOne();
+                notifier.resetCardTwo();
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => const HomePage()),
