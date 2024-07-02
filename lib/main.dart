@@ -1,6 +1,6 @@
 import 'package:anki_like_app/configs/themes.dart';
 import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
-import 'package:anki_like_app/pages/home_page.dart';
+import 'package:anki_like_app/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +22,7 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
       home: PageView(
         children: const [
-          HomePage(),
-          
+          Dashboard(), // Set Dashboard as the initial page
         ],
       ),
     );
