@@ -3,7 +3,11 @@ import 'package:anki_like_app/components/home_page/topic_tile.dart';
 import 'package:anki_like_app/configs/constants.dart';
 import 'package:anki_like_app/data/words.dart';
 import 'package:anki_like_app/configs/styles/palette.dart';
+import 'package:anki_like_app/notifiyers/flascards_notifiyer.dart';
+import 'package:anki_like_app/notifiyers/statistic_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,14 +21,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    for (var word in words) {
-      if (!_topics.contains(word.topic)) {
-        _topics.add(word.topic);
-      }
-      _topics.sort();
-    }
+
+    
+      for (var word in words) {
+        if (!_topics.contains(word.topic)) {
+          _topics.add(word.topic);
+        }
+        _topics.sort();
+        }
+
     super.initState();
   }
+
+  final Logger _log = Logger('home_page.dart');
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,9 @@ class _HomePageState extends State<HomePage> {
     final widthPadding = size.width * 0.04;
     const borderRadius = 30.0;
 
-    return Scaffold(
+    return Consumer<StatsCardsNotifier>(
+      builder:
+          (BuildContext context, StatsCardsNotifier notifier, Widget? child) => Scaffold(
       appBar: AppBar(
           backgroundColor: palette.green,
           toolbarHeight: size.height * .15,
@@ -94,6 +105,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
